@@ -17,7 +17,15 @@
    pip install -r requirements.txt
     ```
 
-4. **Run Command**
+3. **Set the Required Environment Variables**
+   ```bash
+    export WANDB_API_KEY=your_wandb_api_key
+    export WANDB_PROJECT=your_wandb_project_name
+    export HF_TOKEN=your_hf_token
+    ```
+    Please ensure your HF token has permissions to the models being used in `template_flow.py`.
+
+5. **Run Command**
    ```bash
    python3 -m template_flow --environment=pypi run
     ```

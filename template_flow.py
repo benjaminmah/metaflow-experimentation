@@ -42,7 +42,7 @@ class TemplateFlow(FlowSpec):
     
     @card
     @retry(times=4)
-    @pypi(python='3.10.0',
+    @pypi(python='3.10.8',
         packages={
             'torch': '2.5.1',
             'wandb': '0.17.9',
@@ -50,6 +50,7 @@ class TemplateFlow(FlowSpec):
             'mozmlops': '0.1.4',
             'sentencepiece': '0.2.0',
             'protobuf': '4.25.5',
+            'causal-conv1d': '1.4.0',
         })
     @environment(
         vars={

@@ -50,7 +50,7 @@ class TemplateFlow(FlowSpec):
             'mozmlops': '0.1.4',
             'sentencepiece': '0.2.0',
             'protobuf': '4.25.5',
-            'causal-conv1d': '1.4.0',
+            # 'causal-conv1d': '1.4.0',
         })
     @environment(
         vars={
@@ -68,7 +68,8 @@ class TemplateFlow(FlowSpec):
         """
         from transformers import AutoTokenizer, AutoModelForCausalLM
 
-        model_name = "mistralai/Mamba-Codestral-7B-v0.1"
+        # model_name = "mistralai/Mamba-Codestral-7B-v0.1"
+        model_name = "meta-llama/Llama-3.1-8B"
         tokenizer = AutoTokenizer.from_pretrained(model_name, token=os.getenv("HF_TOKEN"))
         model = AutoModelForCausalLM.from_pretrained(model_name, token=os.getenv("HF_TOKEN"))
 

@@ -41,17 +41,19 @@ class TemplateFlow(FlowSpec):
 
     
     @card
-    @retry(times=4)
-    @pypi(python='3.10.8',
-        packages={
-            'torch': '2.5.1',
-            'wandb': '0.17.9',
-            'transformers': '4.46.1',
-            'mozmlops': '0.1.4',
-            'sentencepiece': '0.2.0',
-            'protobuf': '4.25.5',
-            # 'causal-conv1d': '1.4.0',
-        })
+    @kubernetes(image="registry.hub.docker.com/benjaminmah/metaflow:latest", cpu=1, memory=60000)
+    # @kubernetes(image="registry.hub.docker.com/dexterp37/debug-flow-test:v0", cpu=1, memory=60000)
+    # @retry(times=4)
+    # @pypi(python='3.10.8',
+    #     packages={
+    #         'torch': '2.4.0',
+    #         'wandb': '0.17.9',
+    #         'transformers': '4.46.1',
+    #         'mozmlops': '0.1.4',
+    #         'sentencepiece': '0.2.0',
+    #         'protobuf': '4.25.5',
+    #         # 'causal-conv1d': '1.4.0',
+    #     })
     @environment(
         vars={
             "WANDB_API_KEY": os.getenv("WANDB_API_KEY"),
@@ -60,7 +62,7 @@ class TemplateFlow(FlowSpec):
             "OTEL_TRACES_EXPORTER": "none",
         }
     )
-    @kubernetes(cpu=1)
+    # @kubernetes(memory=60000)
     @step
     def generate_message(self):
         """
@@ -68,8 +70,8 @@ class TemplateFlow(FlowSpec):
         """
         from transformers import AutoTokenizer, AutoModelForCausalLM
 
-        # model_name = "mistralai/Mamba-Codestral-7B-v0.1"
-        model_name = "meta-llama/Llama-3.1-8B"
+        model_name = "mistralai/Mamba-Codestral-7B-v0.1"
+        # model_name = "meta-llama/Llama-3.1-8B"
         tokenizer = AutoTokenizer.from_pretrained(model_name, token=os.getenv("HF_TOKEN"))
         model = AutoModelForCausalLM.from_pretrained(model_name, token=os.getenv("HF_TOKEN"))
 
